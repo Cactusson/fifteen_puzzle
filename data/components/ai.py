@@ -70,11 +70,10 @@ class AI:
                 if (self.current_position(row_num, col_num) !=
                         (row_num, col_num)):
                     return False
-        for col_num in range(target_col + 1, len(self._grid[0])):
-            if (self.current_position(target_row, col_num) !=
-                    (target_row, col_num)):
-                return False
-        return True
+        return all(
+            self.current_position(target_row, col_num) == (target_row, col_num)
+            for col_num in range(target_col + 1, len(self._grid[0]))
+        )
 
     def position_tile(self, target_row, target_col, tile_row, tile_col):
         """
@@ -151,10 +150,10 @@ class AI:
         """
         for row_num in range(len(self._grid)):
             for col_num in range(len(self._grid[0])):
-                if row_num > 1 or col_num > target_col:
-                    if (self.current_position(row_num, col_num) !=
-                            (row_num, col_num)):
-                        return False
+                if (row_num > 1 or col_num > target_col) and (
+                    self.current_position(row_num, col_num) != (row_num, col_num)
+                ):
+                    return False
         return True
 
     def row0_invariant(self, target_col):
@@ -217,9 +216,7 @@ class AI:
         """
         path = 'ul'
         self.update_puzzle(path)
-        count = 0
-        while count < 3:
-            count += 1
+        for _ in range(3):
             path += 'rdlu'
             self.update_puzzle('rdlu')
             if test_2x2(self):

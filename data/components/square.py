@@ -37,7 +37,4 @@ class Square(pg.sprite.Sprite):
         """
         hover = self.rect.collidepoint(mouse_pos)
         self.clickable = hover and movable
-        if self.clickable:
-            self.image = self.hover_image
-        else:
-            self.image = self.idle_image
+        self.image = self.hover_image if self.clickable else self.idle_image

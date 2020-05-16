@@ -83,11 +83,11 @@ class FifteenPuzzle:
     def get_movable_squares(self):
         zero_row, zero_col = self.current_position(0, 0)
         result = []
-        if zero_row - 1 >= 0:
+        if zero_row >= 1:
             result.append(self.board[zero_row - 1][zero_col])
         if zero_row + 1 < self.height:
             result.append(self.board[zero_row + 1][zero_col])
-        if zero_col - 1 >= 0:
+        if zero_col >= 1:
             result.append(self.board[zero_row][zero_col - 1])
         if zero_col + 1 < self.width:
             result.append(self.board[zero_row][zero_col + 1])

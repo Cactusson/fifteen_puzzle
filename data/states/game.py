@@ -181,9 +181,8 @@ class Game(tools._State):
                 self.start()
             elif self.state == 'PLAY':
                 for board in self.boards:
-                    if board.keys:
-                        if event.key in board.keys:
-                            board.make_move(board.keys[event.key])
+                    if board.keys and event.key in board.keys:
+                        board.make_move(board.keys[event.key])
         elif event.type == pg.MOUSEBUTTONDOWN:
             if self.state == 'PLAY':
                 for board in self.boards:
